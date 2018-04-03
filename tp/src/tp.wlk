@@ -7,4 +7,6 @@ object rolando {
 		//lucha------------
 	method lucha()= lucha + artefactos.sum({art=>art.lucha()})
 	
+	probando un cambio
+	
 }
