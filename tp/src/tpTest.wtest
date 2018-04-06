@@ -1,0 +1,16 @@
+import tp.*
+
+describe "tp1"{
+fixture{
+	rolando.obtenerArtefactos(espadaDelDestino)
+	rolando.obtenerArtefactos(collarDivino)
+}
+
+	test "rolando lucha" {
+		assert.equals(7,rolando.lucha())
+	}
+	
+	test "rolando hechiceria" {
+		assert.equals(2,rolando.hechiceria())
+	}
+}
