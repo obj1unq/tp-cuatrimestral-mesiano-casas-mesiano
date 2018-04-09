@@ -46,10 +46,16 @@ object espadaDelDestino{
 }
 
 object libroDeHechizos{
+	var capo= rolando
+	
+	method capo(unCapo){
+		capo=unCapo
+	}
+	
 	method lucha()= 0 
 	
 	method hechiceria()=
-		rolando.ValorDeHechiceria()
+		capo.ValorDeHechiceria()
 }
 
 object collarDivino{
