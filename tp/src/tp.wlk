@@ -139,3 +139,57 @@ object espejoFantastico{
 	} 
 	
 }
+// 3 bando del sur----------------
+
+object bandoDelSur{
+	var tesoro=0
+	var material=0
+	
+	method tesoro()=tesoro
+	
+	method agregarTesoro(_tesoro){
+		tesoro+=_tesoro
+	}
+	
+	method material()=material
+	
+	method agregarMaterial(_material){
+		material+=_material
+	}
+}
+
+object oro{
+	
+	method elemento(){
+		bandoDelSur.agregarTesoro(100)
+		}
+} 
+
+object carbon{
+	
+	method elemento(){
+		bandoDelSur.agregarMaterial(50)
+		}
+}
+
+object viejoSabio{
+	var capo= rolando
+	
+	method capo(unCapo){
+		capo=unCapo
+	}
+	
+	method elemento(){
+		capo.luchaIncrementarValor()
+		capo.hechiceriaIncrementarValor()
+	}
+}
+
+
+
+
+
+
+
+
+
