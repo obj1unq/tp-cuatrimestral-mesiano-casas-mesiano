@@ -4,26 +4,33 @@ object rolando {
 	var lucha=3
 	var hechiceria =1
 	var artefactos=#{espadaDelDestino,collarDivino}
+
+	// TODO: No dejen código comentado.
 	//var artefactos=#{}
 	
 	
 	//lucha------------
 	method lucha()= lucha + artefactos.sum({art=>art.lucha()})
 	
+	// TODO Corregir nombre
 	method luchaIncrementarValor(){
 		lucha+=1
 	}
 	//hechiceria---------
 	method hechiceria()=hechiceria + artefactos.sum({art=>art.hechiceria()})
-	
+
+	// TODO Respeten las convenciones, los nombres de método con minúscula.	
+	// De paso, corregir el nombre, si internamente lo llamamos "hechicería" por qué hacia afuera tiene otro nombre?
 	method ValorDeHechiceria()=hechiceria
 	
+	// TODO Corregir nombre
 	method hechiceriaIncrementarValor(){
 		hechiceria+=1
 	}
 	// artefactos-----
 	method artefactos()= artefactos
 	
+	// TODO Corregir nombre
 	method obtenerArtefactos(unArtefacto){
 		artefactos.add(unArtefacto)
 	}
@@ -44,6 +51,7 @@ object espadaDelDestino{
 }
 
 object libroDeHechizos{
+	// TODO Eviten referenciar a rolando desde el código de los artefactos.
 	var capo= rolando
 	
 	method capo(unCapo){
@@ -62,6 +70,7 @@ object collarDivino{
 }
 
  //2.1 armadura y refuerzos---------
+// TODO Sería bueno dividir esto en más archivos.
  
 object armadura{
 	var refuerzo= ninguna
@@ -90,13 +99,15 @@ object bendicion{
 }
 
 object hechizo{
+	// TODO No debe referenciar a rolando.
 	var capo= rolando
 	
 	method capo(unCapo){
 		capo=unCapo
 	}
 	method lucha()= 0 
-	
+
+	// Indentar correctamente.	
 	method hechiceria()=
 	if (capo.hechiceria()>3) 
 	2
@@ -109,9 +120,11 @@ object ninguna{
 	method hechiceria()=0
 }
 
+// TODO Llevar a otro archivo
 // 2.2  espejo fantastico-----
 
 object espejoFantastico{
+	// TODO Evitar referencias a rolando
 	var capo= rolando
 	
 	method capo(unCapo){
@@ -129,7 +142,8 @@ object espejoFantastico{
 		
 	
 	method artefacto()= self.mejorArtefacto()
-	
+
+	// TODO Mejorar nombre, no es descriptivo	
 	method autoExclusion()=
 		capo.artefactos().difference(#{self})
 		
@@ -139,6 +153,8 @@ object espejoFantastico{
 	} 
 	
 }
+
+// TODO Llevar a otro archivo
 // 3 bando del sur----------------
 
 object bandoDelSur{
@@ -173,6 +189,7 @@ object carbon{
 }
 
 object viejoSabio{
+	// TODO Evitar referencias directas a rolando
 	var capo= rolando
 	
 	method capo(unCapo){
