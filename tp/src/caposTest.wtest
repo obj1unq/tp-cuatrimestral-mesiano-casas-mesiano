@@ -1,5 +1,6 @@
 import capos.*
 import bandos.*
+import artefactos.*
 
 describe "tp1"{
 fixture{
