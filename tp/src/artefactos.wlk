@@ -34,9 +34,9 @@ object collarDivino {
 }
 
 // 2.1 armadura y refuerzos---------
-object armadura {
+class Armadura {
 
-	var refuerzo = ninguna
+	var property refuerzo = ninguna
 
 	method lucha() = 2 + refuerzo.lucha()
 
@@ -48,6 +48,10 @@ object armadura {
 		refuerzo = _refuerzo
 	}
 
+}
+
+object armaduras{
+	const property armaduraBendecida=new Armadura(refuerzo=bendicion)
 }
 
 object cotaDeMalla {

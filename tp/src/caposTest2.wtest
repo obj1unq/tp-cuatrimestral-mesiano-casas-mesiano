@@ -1,0 +1,46 @@
+import capos.*
+import bandos.*
+import artefactos.*
+
+describe "tp1" {
+
+	test "pelea" {
+		capos.archibaldo().pelea(capos.rolando())
+		assert.that(capos.archibaldo().estaVivo())
+	}
+
+	test "pelea2" {
+		capos.archibaldo().pelea(capos.rolando())
+		assert.that(not capos.rolando().estaVivo())
+	}
+	
+	test "rolando se encuentra con archibaldo" {
+		capos.rolando().encontrar(capos.archibaldo())
+		assert.that(not capos.rolando().estaVivo())
+	}
+	
+	test "rolando se encuentra con caterina" {
+		capos.rolando().encontrar(capos.caterina())
+		assert.that( capos.rolando().estaVivo())
+		assert.equals(#{espadaDelDestino},capos.rolando().artefactos() )
+		assert.equals(3,capos.rolando().hechiceria())
+		assert.equals(4,capos.rolando().lucha())
+		
+	}
+	
+	test "rolando se encuentra armadura bendecida" {
+		capos.rolando().obtenerArtefactos(armaduras.armaduraBendecida())
+		assert.equals(4,capos.rolando().hechiceria())
+		assert.equals(3,capos.rolando().lucha())
+		
+	}
+	
+	test "rolando se encuentra viejo sabio" {
+		//capos.rolando().obtenerArtefactos(viejosSabios.viejoSabio1())
+		viejosSabios.viejoSabio1().encontradoPor(capos.rolando())
+		assert.equals(4,capos.rolando().hechiceria())
+		assert.equals(2,capos.rolando().lucha())
+		
+	}
+}
+

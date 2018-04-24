@@ -59,12 +59,12 @@ describe "tp1" {
 
 	test "rolando encuentra oro" {
 		capos.rolando().encontrar(oro)
-		assert.equals(100, bandos.bandoDelSur().tesoro())
+		assert.equals(200, bandos.bandoDelSur().tesoro())
 	}
 
 	test "rolando encuentra carbon" {
 		capos.rolando().encontrar(carbon)
-		assert.equals(50, bandos.bandoDelSur().material())
+		assert.equals(100, bandos.bandoDelSur().material())
 	}
 
 	test " bando del sur" {
@@ -76,6 +76,10 @@ describe "tp1" {
 		assert.equals(200, bandos.bandoDelNorte().tesoro())
 		assert.equals(200, bandos.bandoDelNorte().material())
 	}
-
+	
+	test "pelea"{
+		capos.archibaldo().pelea(capos.rolando())
+		assert.that(capos.archibaldo().estaVivo())
+	}
 }
 

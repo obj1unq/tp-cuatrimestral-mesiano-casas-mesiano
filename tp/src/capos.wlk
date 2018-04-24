@@ -7,6 +7,7 @@ class Capo {
 	var property lucha = null
 	var property hechiceria = null
 	const property artefactos = null
+	var property estaVivo = true
 
 	// lucha------------
 	method lucha() = lucha + artefactos.sum({ art => art.lucha() })
@@ -33,16 +34,29 @@ class Capo {
 
 	// elementos-------------
 	method encontrar(unElemento) {
-		unElemento.accionDeEncuentro()
+		unElemento.encontradoPor(self)
 	}
-	
-	method sonAmigos(otroCapo)= otroCapo.bando()==bando
-	
-	method encontradoPor(personaje){
-		return if (self.sonAmigos(personaje)){
-			
-		}else{
-			
+
+	method pelea(adversario) {
+		if (self.lucha() + self.hechiceria() >= adversario.lucha() + adversario.hechiceria()) {
+			adversario.estaMuerto()
+		} else {
+			self.estaMuerto()
+		}
+	}
+
+	method estaMuerto() {
+		estaVivo = false
+	}
+
+	method sonAmigos(otroCapo) = otroCapo.bando() == bando
+
+	method encontradoPor(personaje) {
+		if (self.sonAmigos(personaje)) {
+			artefactos.forEach({ elem => personaje.obtenerArtefactos(elem)})
+			artefactos.clear()
+		} else {
+			self.pelea(personaje)
 		}
 	}
 
@@ -50,15 +64,15 @@ class Capo {
 
 object capos {
 
-	const property rolando = new Capo(bando = bandos.bandoDelSur(), lucha = 3, hechiceria = 1, artefactos = #{})
-	const property archivaldo = new Capo(bando = bandos.bandoDelNorte(), lucha = 3, hechiceria = 3, artefactos = #{ collarDivino, espejoFantastico })
+	const property rolando = new Capo(bando = bandos.bandoDelSur(), lucha = 1, hechiceria = 3, artefactos = #{})
+	const property archibaldo = new Capo(bando = bandos.bandoDelNorte(), lucha = 3, hechiceria = 3, artefactos = #{ collarDivino, espejoFantastico })
 	const property caterina = new Capo(bando = bandos.bandoDelSur(), lucha = 2, hechiceria = 1, artefactos = #{ espadaDelDestino })
 
 }
 
 object oro {
 
-	method accionDeEncuentro() {
+	method encontradoPor(personaje) {
 		bandos.bandoDelSur().agregarTesoro(100)
 	}
 
@@ -66,7 +80,7 @@ object oro {
 
 object carbon {
 
-	method accionDeEncuentro() {
+	method encontradoPor(personaje) {
 		bandos.bandoDelSur().agregarMaterial(50)
 	}
 
@@ -74,19 +88,17 @@ object carbon {
 
 class ViejoSabio {
 
-	var capo = capos.rolando()
-	
-	
+	//var capo = capos.rolando()
 
 	method hechiceria() = valorHechiceriaViejoSabio.hechiceria()
 
-	method capo(unCapo) {
-		capo = unCapo
-	}
+	//method capo(unCapo) {
+	//	capo = unCapo
+	//}
 
-	method accionDeEncuentro() {
-		capo.luchaIncrementarValor()
-		capo.hechiceriaIncrementarValor()
+	method encontradoPor(personaje) {
+		personaje.luchaIncrementarValor()
+		personaje.hechiceriaIncrementarValor()
 	}
 
 }
@@ -97,32 +109,9 @@ object valorHechiceriaViejoSabio {
 
 }
 
-object viejosSabios{
+object viejosSabios {
+
 	const property viejoSabio1 = new ViejoSabio()
+
 }
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
