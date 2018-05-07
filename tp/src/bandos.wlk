@@ -1,6 +1,3 @@
-
-
-
 class Bando {
 
 	var tesoro = 0
@@ -26,3 +23,4 @@ object bandos {
 	const property bandoDelNorte = new Bando(tesoro = 200, material = 200)
 
 }
+
