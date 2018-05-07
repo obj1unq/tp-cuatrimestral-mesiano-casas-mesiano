@@ -1,0 +1,85 @@
+import capos.*
+import bandos.*
+import artefactos.*
+import elementos.*
+import decorado.*
+import wollok.game.*
+
+program game {
+//	CONFIG	
+	game.title("CAPOS")
+	game.height(15)
+	game.width(25)
+		// game.ground("suelo.png")
+//	ubicar objetos
+	game.addVisualIn(fondo, game.at(0, 0))
+	game.addVisualIn(cementerio, game.at(19, 1))
+	game.addVisualIn(castillo, game.at(1, 11))
+	//game.addVisual(espejoFantastico)
+	
+	
+		
+	//capos
+	game.addVisual(capos.caterina())//y=4
+	game.addVisual(capos.rolando())
+	game.addVisual(capos.archibaldo())
+	
+		// game.addVisualIn(capos.archibaldo(), game.at(22,1))
+// muros
+	(0 .. 14).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 3)) } // Izq 
+	(0 .. 14).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 3)) } // Izq m2 
+	(0 .. 14).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 2)) }
+	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 5)) } // Izq 
+	(0 .. 19).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 10)) } // Izq m2
+	(0 .. 19).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 9)) }
+	(3 .. 23).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 7)) } // Izq
+	(3 .. 23).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 7)) } // Izq m2 
+	(3 .. 23).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 6)) }
+	(0 .. 19).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 10)) } // Izq 
+	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 0)) } // abajo
+	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 6)) } // abajo
+	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 14)) } // arriba
+	(0 .. 24).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 13)) }// de arriba
+	(1 .. 6).forEach{ n => game.addVisualIn(new MuroD(), game.at(19, n)) } // columna der
+	(7 .. 14).forEach{ n => game.addVisualIn(new MuroD(), game.at(24, n)) } // columna der
+	(0 .. 14).forEach{ n => game.addVisualIn(new MuroI(), game.at(0, n)) } // columna izq
+	
+	
+	//objetos moviles	
+	game.addVisual(espadaDelDestino)
+	game.addVisual(viejosSabios.viejoSabio1())
+	game.addVisual(viejosSabios.viejoSabio2())
+	game.addVisual(libroDeHechizos)
+	game.addVisual(collarDivino)
+	game.addVisual(armaduras.armaduraBendecida())	
+	
+	
+	
+	//codigo de prueba para establecer los carteles
+	game.addVisual(ganador)
+	//game.addVisualIn(gameOver, game.at(5, 5))
+	game.addVisual(amiga)
+	game.addVisual(pelea)
+	
+// colliders
+	//game.whenCollideDo(capos.rolando(), { algo => algo.efecto() })
+	//game.whenCollideDo(capos.rolando(), { algo => algo.encontradoPor(capos.rolando()) })
+	game.whenCollideDo(capos.rolando(), { algo => algo.efectoDeEncuentro();algo.encontradoPor(capos.rolando()) })
+	//game.whenCollideDo(capos.rolando(), { game.say(capos.caterina(), "hola rolando") })
+	// game.whenCollideDo(capos.rolando(), { g => muro.empuja(g) })
+	
+	
+// press  
+	UP.onPressDo{ capos.rolando().arriba() }
+	DOWN.onPressDo{ capos.rolando().abajo() }
+	LEFT.onPressDo{ capos.rolando().izq();capos.rolando().imagen("rolando2.png") }
+	RIGHT.onPressDo{ capos.rolando().der();capos.rolando().imagen("rolando.png")  }
+	
+	S.onPressDo{ pelea.volverAPosicionInicial();amiga.volverAPosicionInicial() }
+	Q.onPressDo{ game.say(capos.rolando(),capos.rolando(). artefactos()) }
+	
+	
+	
+		// START
+	game.start()
+}

@@ -1,0 +1,18 @@
+import capos.*
+import bandos.*
+import artefactos.*
+import elementos.*
+import decorado.*
+import wollok.game.*
+
+program game {
+//	CONFIG	
+	game.title("CAPOS")
+	game.height(15)
+	game.width(25)
+game.addVisual(espejoFantastico)
+
+
+game.start()
+
+}
