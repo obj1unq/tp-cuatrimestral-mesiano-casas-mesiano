@@ -68,7 +68,6 @@ class Vacio {
 	const property imagen = "vacio.png"
 
 	method efectoDeEncuentro() {
-		//game.whenCollideDo(self, { capos.rolando().abajo()})
 		capos.rolando().abajo()
 	}
 	method encontradoPor(capo){}

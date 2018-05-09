@@ -5,18 +5,17 @@ import elementos.*
 
 describe "tp1" {
 
-	fixture {
+ 	fixture {
 		capos.rolando().obtenerArtefactos(collarDivino)
 		capos.rolando().obtenerArtefactos(espadaDelDestino)
-		capos.rolando().obtenerArtefactos(libroDeHechizos)
-		libroDeHechizos.capo(capos.rolando())
-	}
+		}
 
 	test "rolando lucha" {
 		assert.equals(5, capos.rolando().lucha())
 	}
 
-	test "rolando hechiceria" {
+ 	test "rolando hechiceria" {
+ 		capos.rolando().obtenerArtefactos(libroDeHechizos)
 		assert.equals(7, capos.rolando().hechiceria())
 	}
 
@@ -27,84 +26,23 @@ describe "tp1" {
 	}
 
 	test "rolando espejo hechiceria" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(collarDivino)
-		capos.rolando().obtenerArtefactos(espadaDelDestino)
 		capos.rolando().obtenerArtefactos(espejoFantastico)
 		assert.equals(8, capos.rolando().lucha())
 	}
-
+ 
 	test "rolando excluir" {
+		capos.rolando().obtenerArtefactos(libroDeHechizos)
 		capos.rolando().obtenerArtefactos(espejoFantastico)
-		assert.equals(#{ ninguna,espadaDelDestino, libroDeHechizos, collarDivino }, espejoFantastico.autoExclusion())
+		assert.equals(#{ ninguna, espadaDelDestino, libroDeHechizos, collarDivino }, espejoFantastico.autoExclusion())
 	}
 
 	test "rolando mejor artefacto" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(collarDivino)
-		capos.rolando().obtenerArtefactos(espadaDelDestino)
+	
 		capos.rolando().obtenerArtefactos(espejoFantastico)
 		assert.equals(espadaDelDestino, espejoFantastico.artefacto())
 	}
+
 	
-	test "rolando mejor artefacto2" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(espejoFantastico)
-		assert.equals(0, espejoFantastico.artefacto().lucha())
-	}
-
-	test "espejo Fantastico hechiceria" {
-		assert.equals(5, capos.rolando().lucha())
-	}
-
-	test "espejo Fantastico lucha" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(collarDivino)
-		capos.rolando().obtenerArtefactos(espadaDelDestino)
-		assert.equals(3, espejoFantastico.lucha())
-	}
-
-	test "rolando encuentra" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(collarDivino)
-		capos.rolando().obtenerArtefactos(espadaDelDestino)
-		assert.equals(3, espejoFantastico.lucha())
-	}
-
-	test "rolando encuentra hechiceria y lucha" {
-		capos.rolando().artefactos().clear()
-		capos.rolando().obtenerArtefactos(collarDivino)
-		capos.rolando().obtenerArtefactos(espadaDelDestino)
-		capos.rolando().encontrar(viejosSabios.viejoSabio1())
-		assert.equals(5, capos.rolando().hechiceria())
-		assert.equals(6, capos.rolando().lucha())
-	}
-
-	test "rolando encuentra oro" {
-		capos.rolando().encontrar(cofresDe.oro1())
-		assert.equals(200, bandos.bandoDelSur().tesoro())
-	}
-
-	test "rolando encuentra carbon" {
-		capos.rolando().encontrar(cumulosDe.carbon1())
-		assert.equals(100, bandos.bandoDelSur().material())
-	}
-
-	test " bando del sur" {
-		assert.equals(100, bandos.bandoDelSur().tesoro())
-		assert.equals(50, bandos.bandoDelSur().material())
-	}
-
-	test " bando del norte" {
-		assert.equals(200, bandos.bandoDelNorte().tesoro())
-		assert.equals(200, bandos.bandoDelNorte().material())
-	}
-
-	test "pelea" {
-		capos.rolando().artefactos().clear()
-		capos.archibaldo().pelea(capos.rolando())
-		assert.that(capos.archibaldo().estaVivo())
-	}
 
 }
 

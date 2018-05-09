@@ -5,14 +5,62 @@ import elementos.*
 import decorado.*
 import wollok.game.*
 
+//solo es una prueba que guardo sin valor en el tp
+
 program game {
 //	CONFIG	
 	game.title("CAPOS")
 	game.height(15)
 	game.width(25)
-game.addVisual(espejoFantastico)
-
-
-game.start()
-
+	game.ground("suelo.png")
+	
+//	ubicar objetos
+	game.addVisualIn(castillo, game.at(1, 11))
+	
+// capos
+	game.addVisual(capos.caterina())
+	game.addVisual(capos.rolando())
+	game.addVisual(capos.archibaldo())
+	
+// objetos moviles	
+	game.addVisual(espadaDelDestino)
+	game.addVisual(elementos.viejoSabio1())
+	game.addVisual(elementos.viejoSabio2())
+	game.addVisual(libroDeHechizos)
+	game.addVisual(collarDivino)
+	game.addVisual(armaduras.armaduraBendecida())
+	game.addVisual(elementos.neblina1())
+	game.addVisual(elementos.carbon1())
+	game.addVisual(elementos.oro1())
+	
+// establecer los carteles
+	game.addVisual(ganador)
+	game.addVisual(amiga)
+	game.addVisual(pelea)
+	
+// colliders
+	game.whenCollideDo(capos.rolando(), { algo =>
+		algo.efectoDeEncuentro();
+		algo.encontradoPor(capos.rolando())
+	})
+	
+// press  
+	UP.onPressDo{ capos.rolando().arriba() }
+	DOWN.onPressDo{ capos.rolando().abajo() }
+	LEFT.onPressDo{ capos.rolando().izq()
+	;capos.rolando().imagen("rolando2.png")
+	}
+	RIGHT.onPressDo{ capos.rolando().der()
+	;capos.rolando().imagen("rolando.png")
+	}
+	
+	S.onPressDo{ pelea.volverAPosicionInicial()
+	;
+	game.say(capos.caterina(), "ten cuidado rolando")
+	;
+	amiga.volverAPosicionInicial()
+	}
+	
+		// start
+	game.start()
 }

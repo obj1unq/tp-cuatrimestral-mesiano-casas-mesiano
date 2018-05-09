@@ -2,17 +2,17 @@ import capos.*
 
 class Oro {
 
-	var posicion = new Position(20, 11)
+	const property imagen = "oro.png"
+	var posicion = new Position(22, 8)
 	var property valor = 100
 
 	method encontradoPor(personaje) {
 		personaje.bando().agregarTesoro(valor)
 	}
 
-
 //game
 	method cambiarPosicion() {
-		posicion = new Position(22, 6)
+		posicion = new Position(22, 21)
 	}
 
 	method efectoDeEncuentro() {
@@ -21,40 +21,18 @@ class Oro {
 
 }
 
-object cofresDe {
-	
-	
-	const property oro1 = new Oro()
-
-}
-
 class Carbon {
 
-	var posicion = new Position(21, 11)
+	const property imagen = "carbon.png"
+	var posicion = new Position(11, 8)
+
 	method encontradoPor(personaje) {
 		personaje.bando().agregarMaterial(50)
 	}
 
 //game
 	method cambiarPosicion() {
-		posicion = new Position(22, 6)
-	}
-
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
-	}
-
-}
-
-object cumulosDe {
-
-	var posicion = new Position(22, 11)
-	const property carbon1 = new Carbon()
-
-
-//game
-	method cambiarPosicion() {
-		posicion = new Position(22, 6)
+		posicion = new Position(22, 20)
 	}
 
 	method efectoDeEncuentro() {
@@ -65,24 +43,23 @@ object cumulosDe {
 
 class ViejoSabio {
 
-	var property puntosDeHechiceria = null
-	var posicion = new Position(14, 4)
+	var property puntosDeHechiceria = 1
+	var property posicion = new Position(14, 4)
 	const property imagen = "viejo.png"
 
 	method cambiarPosicion() {
 		posicion = new Position(23, 20)
 	}
-	
-	// game
 
+	// game
 	method efectoDeEncuentro() {
 		self.cambiarPosicion()
 	}
-	
+
 	method encontradoPor(personaje) {
 		personaje.agregarPuntosDeLucha(valorLuchaViejoSabio.lucha())
 		personaje.agregarPuntosDeHechiceria(puntosDeHechiceria)
-	} // hay que hacer un gran cambio el valor de hechiceria ya no es este
+	} 
 
 }
 
@@ -92,37 +69,34 @@ object valorLuchaViejoSabio {
 
 }
 
-object viejosSabios {
-
-	const property viejoSabio1 = new ViejoSabio(puntosDeHechiceria = 1,posicion = new Position(14, 4))
-	const property viejoSabio2 = new ViejoSabio(puntosDeHechiceria = 1,posicion = new Position(14, 11))
-}
-
 class Neblina {
 
+	const property imagen = "neblina.png"
 	var property elementosOcultos = []
+	var property posicion = new Position(16, 3)
 
 	method encontradoPor(personaje) {
 		elementosOcultos.forEach({ elem => personaje.encontrar(elem)})
-	// personaje.agregarPuntosDeLucha(valorLuchaViejoSabio.lucha())
-	// personaje.agregarPuntosDeHechiceria(puntosDeHechiceria)
 	}
-
-}
-
-object neblinas {
-
-	const property neblina1 = new Neblina(elementosOcultos = [ capos.caterina(), viejosSabios.viejoSabio1() ])
-
 
 //game
 	method cambiarPosicion() {
-		posicion = new Position(22, 6)
+		posicion = new Position(29, 6)
 	}
 
 	method efectoDeEncuentro() {
 		self.cambiarPosicion()
 	}
+
+}
+
+object elementos {
+
+	const property carbon1 = new Carbon()
+	const property viejoSabio1 = new ViejoSabio(puntosDeHechiceria = 1, posicion = new Position(14, 4))
+	const property viejoSabio2 = new ViejoSabio(puntosDeHechiceria = 2, posicion = new Position(14, 11))
+	const property oro1 = new Oro()
+	const property neblina1 = new Neblina(elementosOcultos = [ capos.caterina(), self.viejoSabio1() ])
 
 }
 

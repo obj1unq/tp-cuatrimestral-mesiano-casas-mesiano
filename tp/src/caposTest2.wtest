@@ -5,53 +5,63 @@ import elementos.*
 
 describe "tp1" {
 
-	test "rolando lucha" {
-		assert.equals(1, capos.rolando().lucha())
+	fixture {
+		capos.rolando().obtenerArtefactos(collarDivino)
+		capos.rolando().obtenerArtefactos(espadaDelDestino)
+		capos.rolando().obtenerArtefactos(libroDeHechizos)
+	}
+
+	test "espejo Fantastico hechiceria" {
+		assert.equals(5, capos.rolando().lucha())
+	}
+ 
+	test "espejo Fantastico lucha" {
+		capos.rolando().artefactos().clear()
+		capos.rolando().obtenerArtefactos(collarDivino)
+		capos.rolando().obtenerArtefactos(espadaDelDestino)
+		assert.equals(3, espejoFantastico.lucha())
+	}
+
+	test "rolando encuentra" {
+		capos.rolando().artefactos().clear()
+		capos.rolando().obtenerArtefactos(collarDivino)
+		capos.rolando().obtenerArtefactos(espadaDelDestino)
+		assert.equals(3, espejoFantastico.lucha())
+	}
+
+	test "rolando encuentra hechiceria y lucha" {
+		capos.rolando().artefactos().clear()
+		capos.rolando().obtenerArtefactos(collarDivino)
+		capos.rolando().obtenerArtefactos(espadaDelDestino)
+		capos.rolando().encontrar(elementos.viejoSabio1())
+		assert.equals(5, capos.rolando().hechiceria())
+		assert.equals(6, capos.rolando().lucha())
+	}
+
+	test "rolando encuentra oro" {
+		capos.rolando().encontrar(elementos.oro1())
+		assert.equals(200, bandos.bandoDelSur().tesoro())
+	}
+
+	test "rolando encuentra carbon" {
+		capos.rolando().encontrar(elementos.carbon1())
+		assert.equals(100, bandos.bandoDelSur().material())
+	}
+
+	test " bando del sur" {
+		assert.equals(100, bandos.bandoDelSur().tesoro())
+		assert.equals(50, bandos.bandoDelSur().material())
+	}
+
+	test " bando del norte" {
+		assert.equals(200, bandos.bandoDelNorte().tesoro())
+		assert.equals(200, bandos.bandoDelNorte().material())
 	}
 
 	test "pelea" {
+		capos.rolando().artefactos().clear()
 		capos.archibaldo().pelea(capos.rolando())
 		assert.that(capos.archibaldo().estaVivo())
-	}
-
-	test "pelea2" {
-		capos.archibaldo().pelea(capos.rolando())
-		assert.that(not capos.rolando().estaVivo())
-	}
-
-	test "rolando se encuentra con archibaldo" {
-		capos.rolando().encontrar(capos.archibaldo())
-		assert.that(not capos.rolando().estaVivo())
-	}
-
-	test "rolando se encuentra con caterina" {
-		capos.rolando().encontrar(capos.caterina())
-		assert.that(capos.rolando().estaVivo())
-		assert.equals(#{ espadaDelDestino }, capos.rolando().artefactos())
-		assert.equals(3, capos.rolando().hechiceria())
-		assert.equals(4, capos.rolando().lucha())
-	}
-
-	test "rolando se encuentra armadura bendecida" {
-		capos.rolando().obtenerArtefactos(armaduras.armaduraBendecida())
-		assert.equals(4, capos.rolando().hechiceria())
-		assert.equals(3, capos.rolando().lucha())
-	}
-
-	test "rolando se encuentra viejo sabio" {
-		// capos.rolando().obtenerArtefactos(viejosSabios.viejoSabio1())
-		viejosSabios.viejoSabio1().encontradoPor(capos.rolando())
-		assert.equals(4, capos.rolando().hechiceria())
-		assert.equals(2, capos.rolando().lucha())
-	}
-
-	test "rolando se encuentra el viejo sabio, la armadura Bendecida, Caterina, Archibaldo" {
-		viejosSabios.viejoSabio1().encontradoPor(capos.rolando())
-		capos.rolando().obtenerArtefactos(armaduras.armaduraBendecida())
-		capos.rolando().encontrar(capos.caterina())
-		capos.rolando().encontrar(capos.archibaldo())
-		assert.equals(5, capos.rolando().hechiceria())
-		assert.that(not capos.archibaldo().estaVivo())
 	}
 
 }
