@@ -22,6 +22,7 @@ program game {
 	game.addVisual(capos.archibaldo())
 	
 // muros
+	// TODO Acá me parece que nos olvidamos de cómo se construía con subtareas.
 	(0 .. 14).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 3)) } // Izq tierra
 	(0 .. 14).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 3)) } // Izq muro
 	(0 .. 14).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 2)) }// espacio invisible

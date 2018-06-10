@@ -15,8 +15,10 @@ class Capo {
 	var property cartel = null
 
 	// lucha------------
+	// TODO ¿Para qué usamos self.sinArtefactos() aquí? El nombre no ayuda a comprender el objetivo.
 	method lucha() = fuerzaDeLucha + self.sinArtefactos().sum({ art => art.lucha() })
 
+	// TODO Les pedí que mejoraran los nombres de varias cosas como este, no veo que lo hayan hecho.
 	method luchaIncrementarValor() {
 		fuerzaDeLucha += 1
 	}

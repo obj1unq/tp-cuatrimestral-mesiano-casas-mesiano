@@ -19,6 +19,7 @@ object espadaDelDestino {
 		posicion = new Position(22, 5)
 	}
 
+	// TODO Ahora que sabemos herencia podemos eliminar este código repetido.
 	method efectoDeEncuentro() {
 		self.cambiarPosicion()
 	}
@@ -29,6 +30,8 @@ object libroDeHechizos {
 
 	var posicion = new Position(5, 8)
 	const property imagen = "libro.png"
+	
+	// TODO Elimnar referencia a Rolando.
 	var capo = capos.rolando()
 
 	method capo(unCapo) {
