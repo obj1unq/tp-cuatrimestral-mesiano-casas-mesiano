@@ -23,16 +23,19 @@ program game {
 	
 // muros
 	// TODO Acá me parece que nos olvidamos de cómo se construía con subtareas.
-	(0 .. 14).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 3)) } // Izq tierra
+	escenario.tierraIzquierda(0,14,3)
+	//(0 .. 14).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 3)) } // Izq tierra
 	(0 .. 14).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 3)) } // Izq muro
 	(0 .. 14).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 2)) }// espacio invisible
 	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 5)) } // Izq muro
 	(0 .. 19).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 10)) } // Izq muro
 	(0 .. 19).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 9)) }// espacio invisible
-	(3 .. 23).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 7)) } // Izq tierra
+	escenario.tierraIzquierda(3,23,7)
+	//(3 .. 23).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 7)) } // Izq tierra
 	(3 .. 23).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 7)) } // Izq muro
 	(3 .. 23).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 6)) }// espacio invisible
-	(0 .. 19).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 10)) } // Izq 
+	escenario.tierraIzquierda(0,19,10)
+	//(0 .. 19).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 10)) } // Izq 
 	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 0)) } // abajo
 	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 6)) } // abajo
 	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 14)) } // arriba
@@ -79,4 +82,11 @@ program game {
 	
 		// START
 	game.start()
+
 }
+
+
+
+
+
+

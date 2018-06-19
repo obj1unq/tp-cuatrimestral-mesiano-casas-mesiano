@@ -9,7 +9,7 @@ class Capo {
 	var property bando = null
 	var property fuerzaDeLucha = null
 	var property fuerzaDeHechiceria = null
-	const property artefactos = null
+	const property artefactos = #{}
 	var property estaVivo = true
 	var property imagen = null
 	var property cartel = null
@@ -19,7 +19,8 @@ class Capo {
 	method lucha() = fuerzaDeLucha + self.sinArtefactos().sum({ art => art.lucha() })
 
 	// TODO Les pedí que mejoraran los nombres de varias cosas como este, no veo que lo hayan hecho.
-	method luchaIncrementarValor() {
+	//cambie el nombre 
+	method incrementarValorDeLucha() {
 		fuerzaDeLucha += 1
 	}
 

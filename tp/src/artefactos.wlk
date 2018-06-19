@@ -1,7 +1,22 @@
 import capos.*
 
+//clase artefacto---
+class Artefacto {
+
+	method cambiarPosicion()
+
+	method encontradoPor(unCapo) {
+		unCapo.obtenerArtefactos(self)
+	}
+
+	method efectoDeEncuentro() {
+		self.cambiarPosicion()
+	}
+
+}
+
 //artefactos simples-------
-object espadaDelDestino {
+object espadaDelDestino inherits Artefacto {
 
 	var posicion = new Position(10, 1)
 	const property imagen = "espada.png"
@@ -10,29 +25,20 @@ object espadaDelDestino {
 
 	method hechiceria() = 0
 
-	method encontradoPor(unCapo) {
-		unCapo.obtenerArtefactos(self)
-	}
-
 // game
-	method cambiarPosicion() {
+	override method cambiarPosicion() {
 		posicion = new Position(22, 5)
-	}
-
-	// TODO Ahora que sabemos herencia podemos eliminar este código repetido.
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
 	}
 
 }
 
-object libroDeHechizos {
+object libroDeHechizos inherits Artefacto {
 
 	var posicion = new Position(5, 8)
 	const property imagen = "libro.png"
 	
 	// TODO Elimnar referencia a Rolando.
-	var capo = capos.rolando()
+	var capo = capos.rolando() // referenciado por el game
 
 	method capo(unCapo) {
 		capo = unCapo
@@ -44,22 +50,18 @@ object libroDeHechizos {
 
 	method hechiceria() = capo.ValorDeHechiceria()
 
-	method encontradoPor(unCapo) {
-		unCapo.obtenerArtefactos(self)
+	override method encontradoPor(unCapo) {
+		super(unCapo)
 		self.capo(unCapo)
 	}
 
-	method cambiarPosicion() {
+	override method cambiarPosicion() {
 		posicion = new Position(20, 6)
-	}
-
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
 	}
 
 }
 
-object collarDivino {
+object collarDivino inherits Artefacto {
 
 	var posicion = new Position(2, 6)
 	const property imagen = "collar.png"
@@ -68,26 +70,19 @@ object collarDivino {
 
 	method hechiceria() = 1
 
-	method encontradoPor(unCapo) {
-		unCapo.obtenerArtefactos(self)
-	}
-
 // game
-	method cambiarPosicion() {
+	override method cambiarPosicion() {
 		posicion = new Position(22, 6)
-	}
-
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
 	}
 
 }
 
 // 2.1 armadura y refuerzos---------
-class Armadura {
+class Armadura inherits Artefacto {
 
 	var posicion = new Position(10, 4)
 	const property imagen = "armadura.png"
+	
 	var property capo = capos.rolando()
 	var property refuerzo = ninguna
 
@@ -101,76 +96,52 @@ class Armadura {
 		refuerzo = _refuerzo
 	}
 
-	method encontradoPor(unCapo) {
+	override method encontradoPor(unCapo) {
 		self.capo(unCapo)
 		refuerzo.Capo(capo)
-		unCapo.obtenerArtefactos(self)
+		super(unCapo)
 	}
 
 // game
-	method cambiarPosicion() {
+	override method cambiarPosicion() {
 		posicion = new Position(24, 6)
 	}
 
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
-	}
-
 }
 
-object cotaDeMalla {
+class Refuerzo {
 
 	var capo = capos.rolando()
-
-	method capo(unCapo) {
-		capo = unCapo
-	}
-
-	method lucha() = 1
-
-	method hechiceria() = 0
-
-}
-
-object bendicion {
-
-	var capo = capos.rolando()
-
-	method capo(unCapo) {
-		capo = unCapo
-	}
-
-	method lucha() = 0
-
-	method hechiceria() = 1
-
-}
-
-object hechizo {
-
-	var capo = capos.rolando()
-
-	method capo(unCapo) {
-		capo = unCapo
-	}
-
-	method lucha() = 0
-
-	method hechiceria() = if (capo.hechiceria() > 3) 2 else 0
-
-}
-
-object ninguna {
-
-	var capo = capos.rolando()
-
-	method capo(unCapo) {
-		capo = unCapo
-	}
 
 	method lucha() = 0
 
 	method hechiceria() = 0
+
+	method capo(unCapo) {
+		capo = unCapo
+	}
+
+}
+
+object cotaDeMalla inherits Refuerzo {
+
+	override method lucha() = 1
+
+}
+
+object bendicion inherits Refuerzo {
+
+	override method hechiceria() = 1
+
+}
+
+object hechizo inherits Refuerzo {
+
+	override method hechiceria() = if (capo.hechiceria() > 3) 2 else 0
+
+}
+
+object ninguna inherits Refuerzo {
 
 }
 
@@ -181,7 +152,7 @@ object armaduras {
 }
 
 // 2.2  espejo fantastico-----
-object espejoFantastico {
+object espejoFantastico inherits Artefacto {
 
 	var posicion = new Position(8, 11)
 	const property imagen = "espejo.png"
@@ -203,20 +174,15 @@ object espejoFantastico {
 		return self.autoExclusion().max({ elem => elem.lucha() + elem.hechiceria() })
 	}
 
-	method encontradoPor(unCapo) {
+	override method encontradoPor(unCapo) {
 		self.capo(unCapo)
-		unCapo.obtenerArtefactos(self)
+		super(unCapo)
 	}
 
 // game
-	method cambiarPosicion() {
+	override method cambiarPosicion() {
 		posicion = new Position(24, 6)
 	}
 
-	method efectoDeEncuentro() {
-		self.cambiarPosicion()
-	}
-
 }
-
 

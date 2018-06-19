@@ -126,4 +126,9 @@ object ganador {
 	}
 
 }
+object escenario {
+	
+	method tierraIzquierda (i,f,p)=
+	 (i .. f).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, p)) } // Izq tierra
+}
 
