@@ -6,6 +6,8 @@ import elementos.*
 describe "tp1" {
 
 	fixture {
+		espejoFantastico.capo(capos.rolando())
+ 		libroDeHechizos.capo(capos.rolando())
 		capos.rolando().obtenerArtefactos(collarDivino)
 		capos.rolando().obtenerArtefactos(espadaDelDestino)
 		capos.rolando().obtenerArtefactos(libroDeHechizos)

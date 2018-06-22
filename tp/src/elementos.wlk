@@ -1,4 +1,9 @@
 import capos.*
+//
+import capos.*
+import bandos.*
+import artefactos.*
+import elementos.*
 
 class Oro {
 

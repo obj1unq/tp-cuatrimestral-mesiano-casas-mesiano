@@ -16,7 +16,7 @@ class Capo {
 
 	// lucha------------
 	// TODO ¿Para qué usamos self.sinArtefactos() aquí? El nombre no ayuda a comprender el objetivo.
-	method lucha() = fuerzaDeLucha + self.sinArtefactos().sum({ art => art.lucha() })
+	method lucha() = fuerzaDeLucha + self.conElArtefactoNinguna().sum({ art => art.lucha() })
 
 	// TODO Les pedí que mejoraran los nombres de varias cosas como este, no veo que lo hayan hecho.
 	//cambie el nombre 
@@ -44,7 +44,7 @@ class Capo {
 	// artefactos-----
 	method artefactos() = artefactos
 	
-	method sinArtefactos()=artefactos + #{ninguna}
+	method conElArtefactoNinguna()=artefactos + #{ninguna}
 
 	method obtenerArtefactos(unArtefacto) {
 		artefactos.add(unArtefacto)

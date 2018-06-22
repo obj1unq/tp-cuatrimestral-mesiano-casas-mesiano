@@ -5,7 +5,7 @@ import elementos.*
 import decorado.*
 import wollok.game.*
 
-//solo es una prueba que guardo sin valor en el tp
+//solo es una prueba que guardo sin valor en el tp para ver si corre mejor sin tanto decorado
 
 program game {
 //	CONFIG	
@@ -13,6 +13,9 @@ program game {
 	game.height(15)
 	game.width(25)
 	game.ground("suelo.png")
+	
+	espejoFantastico.capo(capos.rolando())
+ 	libroDeHechizos.capo(capos.rolando())
 	
 //	ubicar objetos
 	game.addVisualIn(castillo, game.at(1, 11))

@@ -10,6 +10,9 @@ program game {
 	game.title("CAPOS")
 	game.height(15)
 	game.width(25)
+	
+	espejoFantastico.capo(capos.rolando())
+ 	libroDeHechizos.capo(capos.rolando())
 		
 //	ubicar objetos
 	game.addVisualIn(fondo, game.at(0, 0))
@@ -22,27 +25,10 @@ program game {
 	game.addVisual(capos.archibaldo())
 	
 // muros
-	// TODO Acá me parece que nos olvidamos de cómo se construía con subtareas.
-	escenario.tierraIzquierda(0,14,3)
-	//(0 .. 14).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 3)) } // Izq tierra
-	(0 .. 14).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 3)) } // Izq muro
-	(0 .. 14).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 2)) }// espacio invisible
-	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 5)) } // Izq muro
-	(0 .. 19).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 10)) } // Izq muro
-	(0 .. 19).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 9)) }// espacio invisible
-	escenario.tierraIzquierda(3,23,7)
-	//(3 .. 23).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 7)) } // Izq tierra
-	(3 .. 23).forEach{ n => game.addVisualIn(new Muro(imagen = "muro2.png"), game.at(n, 7)) } // Izq muro
-	(3 .. 23).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 6)) }// espacio invisible
-	escenario.tierraIzquierda(0,19,10)
-	//(0 .. 19).forEach{ n => game.addVisualIn(new Tierra(), game.at(n, 10)) } // Izq 
-	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 0)) } // abajo
-	(19 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 6)) } // abajo
-	(0 .. 24).forEach{ n => game.addVisualIn(new Muro(), game.at(n, 14)) } // arriba
-	(0 .. 24).forEach{ n => game.addVisualIn(new Vacio(), game.at(n, 13)) } // de arriba
-	(1 .. 6).forEach{ n => game.addVisualIn(new MuroD(), game.at(19, n)) } // columna der
-	(7 .. 14).forEach{ n => game.addVisualIn(new MuroD(), game.at(24, n)) } // columna der
-	(0 .. 14).forEach{ n => game.addVisualIn(new MuroI(), game.at(0, n)) } // columna izq
+	
+	escenario.construirEscenario()
+	
+
 
 // objetos moviles	
 	game.addVisual(espadaDelDestino)

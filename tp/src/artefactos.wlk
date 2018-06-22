@@ -1,8 +1,18 @@
 import capos.*
+//
+import capos.*
+import bandos.*
+import artefactos.*
+import elementos.*
 
 //clase artefacto---
 class Artefacto {
 
+
+	method lucha() = 0
+
+	method hechiceria() = 0
+	
 	method cambiarPosicion()
 
 	method encontradoPor(unCapo) {
@@ -21,9 +31,8 @@ object espadaDelDestino inherits Artefacto {
 	var posicion = new Position(10, 1)
 	const property imagen = "espada.png"
 
-	method lucha() = 3
+	override method lucha() = 3
 
-	method hechiceria() = 0
 
 // game
 	override method cambiarPosicion() {
@@ -37,8 +46,8 @@ object libroDeHechizos inherits Artefacto {
 	var posicion = new Position(5, 8)
 	const property imagen = "libro.png"
 	
-	// TODO Elimnar referencia a Rolando.
-	var capo = capos.rolando() // referenciado por el game
+	
+	var capo 
 
 	method capo(unCapo) {
 		capo = unCapo
@@ -46,9 +55,8 @@ object libroDeHechizos inherits Artefacto {
 
 	method capo() = capo
 
-	method lucha() = 0
 
-	method hechiceria() = capo.ValorDeHechiceria()
+	override method hechiceria() = capo.ValorDeHechiceria()
 
 	override method encontradoPor(unCapo) {
 		super(unCapo)
@@ -66,9 +74,9 @@ object collarDivino inherits Artefacto {
 	var posicion = new Position(2, 6)
 	const property imagen = "collar.png"
 
-	method lucha() = 1
+	override method lucha() = 1
 
-	method hechiceria() = 1
+	override method hechiceria() = 1
 
 // game
 	override method cambiarPosicion() {
@@ -83,12 +91,12 @@ class Armadura inherits Artefacto {
 	var posicion = new Position(10, 4)
 	const property imagen = "armadura.png"
 	
-	var property capo = capos.rolando()
+	var property capo
 	var property refuerzo = ninguna
 
-	method lucha() = 2 + refuerzo.lucha()
+	override method lucha() = 2 + refuerzo.lucha()
 
-	method hechiceria() = 0 + refuerzo.hechiceria()
+	override method hechiceria() = super() + refuerzo.hechiceria()
 
 	method refuerzo() = refuerzo
 
@@ -147,7 +155,7 @@ object ninguna inherits Refuerzo {
 
 object armaduras {
 
-	const property armaduraBendecida = new Armadura(refuerzo = bendicion)
+	const property armaduraBendecida = new Armadura(refuerzo = bendicion, capo=capos.rolando())
 
 }
 
@@ -156,19 +164,19 @@ object espejoFantastico inherits Artefacto {
 
 	var posicion = new Position(8, 11)
 	const property imagen = "espejo.png"
-	var capo = capos.rolando()
+	var property capo
 
 	method capo(unCapo) {
 		capo = unCapo
 	}
 
-	method lucha() = if (self.autoExclusion().size() == 0) 0 else self.mejorArtefacto().lucha()
+	override method lucha() = if (self.autoExclusion().size() == 0) 0 else self.mejorArtefacto().lucha()
 
-	method hechiceria() = if (self.autoExclusion().size() == 0) 0 else self.mejorArtefacto().hechiceria()
+	override method hechiceria() = if (self.autoExclusion().size() == 0) 0 else self.mejorArtefacto().hechiceria()
 
 	method artefacto() = self.mejorArtefacto()
 
-	method autoExclusion() = capo.sinArtefactos().difference(#{ self })
+	method autoExclusion() = self.capo().conElArtefactoNinguna().difference(#{ self })
 
 	method mejorArtefacto() {
 		return self.autoExclusion().max({ elem => elem.lucha() + elem.hechiceria() })

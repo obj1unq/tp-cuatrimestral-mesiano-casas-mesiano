@@ -6,6 +6,8 @@ import elementos.*
 describe "tp1" {
 
  	fixture {
+ 		espejoFantastico.capo(capos.rolando())
+ 		libroDeHechizos.capo(capos.rolando())
 		capos.rolando().obtenerArtefactos(collarDivino)
 		capos.rolando().obtenerArtefactos(espadaDelDestino)
 		}
@@ -15,6 +17,7 @@ describe "tp1" {
 	}
 
  	test "rolando hechiceria" {
+ 		libroDeHechizos.capo(capos.rolando())
  		capos.rolando().obtenerArtefactos(libroDeHechizos)
 		assert.equals(7, capos.rolando().hechiceria())
 	}
@@ -26,21 +29,25 @@ describe "tp1" {
 	}
 
 	test "rolando espejo hechiceria" {
+		libroDeHechizos.capo(capos.rolando())
 		capos.rolando().obtenerArtefactos(espejoFantastico)
 		assert.equals(8, capos.rolando().lucha())
 	}
  
 	test "rolando excluir" {
+		libroDeHechizos.capo(capos.rolando())
 		capos.rolando().obtenerArtefactos(libroDeHechizos)
 		capos.rolando().obtenerArtefactos(espejoFantastico)
 		assert.equals(#{ ninguna, espadaDelDestino, libroDeHechizos, collarDivino }, espejoFantastico.autoExclusion())
 	}
 
 	test "rolando mejor artefacto" {
-	
+		libroDeHechizos.capo(capos.rolando())
 		capos.rolando().obtenerArtefactos(espejoFantastico)
 		assert.equals(espadaDelDestino, espejoFantastico.artefacto())
+		assert.equals(capos.rolando(), espejoFantastico.capo())
 	}
+	
 
 	
 

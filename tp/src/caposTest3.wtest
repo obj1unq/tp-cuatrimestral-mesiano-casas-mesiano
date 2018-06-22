@@ -4,6 +4,11 @@ import artefactos.*
 import elementos.*
 
 describe "tp1" {
+	
+	fixture{
+	espejoFantastico.capo(capos.rolando())
+ 	libroDeHechizos.capo(capos.rolando())
+	}
 
 	test "rolando lucha" {
 		assert.equals(1, capos.rolando().lucha())
